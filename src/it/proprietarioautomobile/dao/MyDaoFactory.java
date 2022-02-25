@@ -2,6 +2,8 @@ package it.proprietarioautomobile.dao;
 
 import it.proprietarioautomobile.dao.automobile.AutomobileDAO;
 import it.proprietarioautomobile.dao.automobile.AutomobileDAOImpl;
+import it.proprietarioautomobile.dao.proprietario.ProprietarioDAO;
+import it.proprietarioautomobile.dao.proprietario.ProprietarioDAOImpl;
 
 public class MyDaoFactory {
 
@@ -15,7 +17,7 @@ public class MyDaoFactory {
 		return automobileDAOInstance;
 	}
 
-	public static ProprietarioDAO getMunicipioDAOInstance() {
+	public static ProprietarioDAO getProprietarioDAOInstance() {
 		if (proprietarioDAOInstance == null)
 			proprietarioDAOInstance = new ProprietarioDAOImpl();
 		return proprietarioDAOInstance;
