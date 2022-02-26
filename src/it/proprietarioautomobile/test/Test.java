@@ -22,6 +22,8 @@ public class Test {
 
 			testListAllProprietario(proprietarioService);
 
+			testUpdateProprietario(proprietarioService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -54,6 +56,26 @@ public class Test {
 		listaDiProprietari = proprietarioService.listAllProprietari();
 		if (listaDiProprietari == null || listaDiProprietari.isEmpty())
 			throw new RuntimeException("lista di proprietari vuota");
+		System.out.println("----- test eseguito con successo -----");
+	}
+
+	private static void testUpdateProprietario(ProprietarioService proprietarioService) throws Exception {
+		System.out.println("----- Inizio test update proprietario -----");
+		List<Proprietario> listaDiProprietari = new ArrayList<Proprietario>();
+		listaDiProprietari = proprietarioService.listAllProprietari();
+		if (listaDiProprietari == null || listaDiProprietari.isEmpty())
+			throw new RuntimeException("lista di proprietari vuota");
+		Proprietario proprietarioUpdate = new Proprietario("update", "update", "update",
+				new java.util.Date(2022, 01, 01));
+		if (proprietarioUpdate.getId() != null)
+			throw new RuntimeException("test di update fallito, record gia presente");
+		proprietarioService.inserisciNuovo(proprietarioUpdate);
+		if (proprietarioUpdate.getId() == null)
+			throw new RuntimeException("test di update fallito, record non inserito");
+		proprietarioUpdate.setCognome("nuovo update");
+		proprietarioService.aggiorna(proprietarioUpdate);
+		if (!(proprietarioUpdate.getCognome().equals("nuovo update")))
+			throw new RuntimeException("update fallito");
 		System.out.println("----- test eseguito con successo -----");
 	}
 

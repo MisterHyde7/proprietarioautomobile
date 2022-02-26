@@ -132,4 +132,22 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 
 	}
 
+	@Override
+	public Proprietario findById(Long idInput) throws Exception {
+
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+
+			proprietarioDAO.setEntityManager(entityManager);
+
+			return proprietarioDAO.get(idInput);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
 }

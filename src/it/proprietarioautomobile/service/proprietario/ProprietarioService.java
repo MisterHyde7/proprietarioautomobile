@@ -11,6 +11,8 @@ public interface ProprietarioService {
 
 	public Proprietario caricaSingoloProprietario(Long id) throws Exception;
 
+	public Proprietario findById(Long idInput) throws Exception;
+
 	public void aggiorna(Proprietario proprietarioInstance) throws Exception;
 
 	public void inserisciNuovo(Proprietario proprietarioInstance) throws Exception;
