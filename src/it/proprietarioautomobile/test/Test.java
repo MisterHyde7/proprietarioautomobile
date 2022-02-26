@@ -35,6 +35,8 @@ public class Test {
 
 			testListAllAutomobile(automobileService);
 
+			testInserisciAutomobile(automobileService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -149,6 +151,25 @@ public class Test {
 		listaDiAuto = automobileService.listAllAutomobili();
 		if (listaDiAuto == null || listaDiAuto.isEmpty())
 			throw new RuntimeException("lista di proprietari vuota");
+		System.out.println("----- test eseguito con successo -----");
+	}
+
+	private static void testUpdateAutomobile(AutomobileService automobileService) throws Exception {
+		System.out.println("----- Inizio test update automobile -----");
+		List<Automobile> listaDiAuto = new ArrayList<Automobile>();
+		listaDiAuto = automobileService.listAllAutomobili();
+		if (listaDiAuto == null || listaDiAuto.isEmpty())
+			throw new RuntimeException("lista di automobili vuota");
+		Automobile automobileUpdate = new Automobile("update", "update", "update", 2000);
+		if (automobileUpdate.getId() != null)
+			throw new RuntimeException("test di update fallito, record gia presente");
+		automobileService.inserisciNuovo(automobileUpdate);
+		if (automobileUpdate.getId() == null)
+			throw new RuntimeException("test di update fallito, record non inserito");
+		automobileUpdate.setAnnoImmatricolazione(1990);
+		automobileService.aggiorna(automobileUpdate);
+		if (automobileUpdate.getAnnoImmatricolazione() != 1990)
+			throw new RuntimeException("update fallito");
 		System.out.println("----- test eseguito con successo -----");
 	}
 
