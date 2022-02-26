@@ -26,6 +26,8 @@ public class Test {
 
 			testFindById(proprietarioService);
 
+			testRemove(proprietarioService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -92,6 +94,25 @@ public class Test {
 			throw new RuntimeException("test di inserimento fallito, record non inserito");
 		if (proprietarioService.caricaSingoloProprietario(proprietarioDaTrovare.getId()) == null)
 			throw new RuntimeException("errore find by id");
+		System.out.println("----- test eseguito con successo -----");
+	}
+
+	private static void testRemove(ProprietarioService proprietarioService) throws Exception {
+		System.out.println("----- Inizio test remove proprietario -----");
+		List<Proprietario> listaDiProprietari = new ArrayList<Proprietario>();
+		listaDiProprietari = proprietarioService.listAllProprietari();
+		if (listaDiProprietari == null || listaDiProprietari.isEmpty())
+			throw new RuntimeException("lista di proprietari vuota");
+		Proprietario proprietarioRemove = new Proprietario("remove", "remove", "remove",
+				new java.util.Date(2022, 01, 01));
+		if (proprietarioRemove.getId() != null)
+			throw new RuntimeException("test di remove fallito, record gia presente");
+		proprietarioService.inserisciNuovo(proprietarioRemove);
+		if (proprietarioRemove.getId() == null)
+			throw new RuntimeException("test di remove fallito, record non inserito");
+		proprietarioService.rimuovi(proprietarioRemove);
+		if (proprietarioService.caricaSingoloProprietario(proprietarioRemove.getId()) != null)
+			throw new RuntimeException("test di remove fallito");
 		System.out.println("----- test eseguito con successo -----");
 	}
 
