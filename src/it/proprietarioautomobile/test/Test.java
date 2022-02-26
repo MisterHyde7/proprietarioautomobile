@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.proprietarioautomobile.dao.EntityManagerUtil;
+import it.proprietarioautomobile.model.Automobile;
 import it.proprietarioautomobile.model.Proprietario;
 import it.proprietarioautomobile.service.MyServiceFactory;
 import it.proprietarioautomobile.service.automobile.AutomobileService;
@@ -27,6 +28,10 @@ public class Test {
 			testFindById(proprietarioService);
 
 			testRemove(proprietarioService);
+
+			// ==========================//
+
+			testInserisciAutomobile(automobileService);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -113,6 +118,17 @@ public class Test {
 		proprietarioService.rimuovi(proprietarioRemove);
 		if (proprietarioService.caricaSingoloProprietario(proprietarioRemove.getId()) != null)
 			throw new RuntimeException("test di remove fallito");
+		System.out.println("----- test eseguito con successo -----");
+	}
+
+	private static void testInserisciAutomobile(AutomobileService automobileService) throws Exception {
+		System.out.println("----- Inizio test inserimento nuovo automobile -----");
+		Automobile autoDaInserire = new Automobile("test", "test", "test", 2000);
+		if (autoDaInserire.getId() != null)
+			throw new RuntimeException("test di inserimento fallito, record gia presente");
+		automobileService.inserisciNuovo(autoDaInserire);
+		if (autoDaInserire.getId() == null)
+			throw new RuntimeException("test di inserimento fallito, record non inserito");
 		System.out.println("----- test eseguito con successo -----");
 	}
 

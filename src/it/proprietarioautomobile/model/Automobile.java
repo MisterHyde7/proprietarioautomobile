@@ -33,6 +33,14 @@ public class Automobile {
 	public Automobile() {
 	}
 
+	public Automobile(String marca, String modello, String targa, int annoImmatricolazione) {
+		super();
+		this.marca = marca;
+		this.modello = modello;
+		this.targa = targa;
+		this.annoImmatricolazione = annoImmatricolazione;
+	}
+
 	public Automobile(Long id, String marca, String modello, String targa, int annoImmatricolazione) {
 		super();
 		this.id = id;
