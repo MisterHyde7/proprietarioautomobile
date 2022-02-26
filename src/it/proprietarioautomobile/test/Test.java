@@ -24,6 +24,8 @@ public class Test {
 
 			testUpdateProprietario(proprietarioService);
 
+			testFindById(proprietarioService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -76,6 +78,20 @@ public class Test {
 		proprietarioService.aggiorna(proprietarioUpdate);
 		if (!(proprietarioUpdate.getCognome().equals("nuovo update")))
 			throw new RuntimeException("update fallito");
+		System.out.println("----- test eseguito con successo -----");
+	}
+
+	private static void testFindById(ProprietarioService proprietarioService) throws Exception {
+		System.out.println("----- Inizio test find by id proprietario -----");
+		Proprietario proprietarioDaTrovare = new Proprietario("luca", "martucci", "mrt",
+				new java.util.Date(2022, 01, 01));
+		if (proprietarioDaTrovare.getId() != null)
+			throw new RuntimeException("test di inserimento fallito, record gia presente");
+		proprietarioService.inserisciNuovo(proprietarioDaTrovare);
+		if (proprietarioDaTrovare.getId() == null)
+			throw new RuntimeException("test di inserimento fallito, record non inserito");
+		if (proprietarioService.caricaSingoloProprietario(proprietarioDaTrovare.getId()) == null)
+			throw new RuntimeException("errore find by id");
 		System.out.println("----- test eseguito con successo -----");
 	}
 
