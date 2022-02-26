@@ -132,4 +132,21 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 
 	}
 
+	@Override
+	public Long contaQuantiConAutoImmatricolataDopo(int input) throws Exception {
+		
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+		
+		try {
+			
+			proprietarioDAO.setEntityManager(entityManager);
+			
+			return proprietarioDAO.contaQuantiHannoAutoImmatricolateNel(input);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 }

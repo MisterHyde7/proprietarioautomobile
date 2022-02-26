@@ -16,6 +16,8 @@ public interface ProprietarioService {
 	public void inserisciNuovo(Proprietario proprietarioInstance) throws Exception;
 
 	public void rimuovi(Proprietario proprietarioInstance) throws Exception;
+	
+	public Long contaQuantiConAutoImmatricolataDopo (int input) throws Exception;
 
 	// per injection
 	public void setProprietarioDAO(ProprietarioDAO proprietarioDAO);

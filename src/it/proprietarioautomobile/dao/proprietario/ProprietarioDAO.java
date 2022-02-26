@@ -5,4 +5,6 @@ import it.proprietarioautomobile.model.Proprietario;
 
 public interface ProprietarioDAO extends IBaseDAO<Proprietario> {
 
+	public Long contaQuantiHannoAutoImmatricolateNel(int annoInput) throws Exception;
+
 }

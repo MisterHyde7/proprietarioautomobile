@@ -132,4 +132,20 @@ public class AutomobileServiceImpl implements AutomobileService {
 		}
 	}
 
+	@Override
+	public List<Automobile> quanteAutoConProprietarioConCodFis(String input) throws Exception {
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			
+			automobileDAO.setEntityManager(entityManager);
+			
+			return automobileDAO.quanteAutoConProprietariConCodFiscaleUgualeA(input);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 }

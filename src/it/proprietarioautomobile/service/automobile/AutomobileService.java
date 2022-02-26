@@ -16,6 +16,8 @@ public interface AutomobileService {
 	public void inserisciNuovo(Automobile automobileInstance) throws Exception;
 
 	public void rimuovi(Automobile automobileInstance) throws Exception;
+	
+	public List<Automobile> quanteAutoConProprietarioConCodFis(String input) throws Exception ;
 
 	// per injection
 	public void setAutomobileDAO(AutomobileDAO automobileInstance);
