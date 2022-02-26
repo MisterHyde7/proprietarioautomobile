@@ -56,6 +56,14 @@ public class Proprietario {
 		this.automobili = automobili;
 	}
 
+	public Proprietario(String nome, String cognome, String codiceFiscale, Date dataDiNascita) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codiceFiscale = codiceFiscale;
+		this.dataDiNascita = dataDiNascita;
+	}
+
 	public Long getId() {
 		return id;
 	}
