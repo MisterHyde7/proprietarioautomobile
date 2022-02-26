@@ -39,6 +39,8 @@ public class Test {
 
 			testFindByIdAuto(automobileService);
 
+			testRemoveAuto(automobileService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -176,7 +178,7 @@ public class Test {
 	}
 
 	private static void testFindByIdAuto(AutomobileService automobileService) throws Exception {
-		System.out.println("----- Inizio test find by id proprietario -----");
+		System.out.println("----- Inizio test find by id automobile -----");
 		Automobile autoDaTrovare = new Automobile("find", "find", "find", 2000);
 		if (autoDaTrovare.getId() != null)
 			throw new RuntimeException("test di inserimento fallito, record gia presente");
@@ -185,6 +187,24 @@ public class Test {
 			throw new RuntimeException("test di inserimento fallito, record non inserito");
 		if (automobileService.caricaSingolaAutomobile(autoDaTrovare.getId()) == null)
 			throw new RuntimeException("errore find by id");
+		System.out.println("----- test eseguito con successo -----");
+	}
+
+	private static void testRemoveAuto(AutomobileService automobileService) throws Exception {
+		System.out.println("----- Inizio test remove automobile -----");
+		List<Automobile> listaDiAuto = new ArrayList<Automobile>();
+		listaDiAuto = automobileService.listAllAutomobili();
+		if (listaDiAuto == null || listaDiAuto.isEmpty())
+			throw new RuntimeException("lista di proprietari vuota");
+		Automobile autoRemove = new Automobile("remove", "remove", "remove", 2000);
+		if (autoRemove.getId() != null)
+			throw new RuntimeException("test di remove fallito, record gia presente");
+		automobileService.inserisciNuovo(autoRemove);
+		if (autoRemove.getId() == null)
+			throw new RuntimeException("test di remove fallito, record non inserito");
+		automobileService.rimuovi(autoRemove);
+		if (automobileService.caricaSingolaAutomobile(autoRemove.getId()) != null)
+			throw new RuntimeException("test di remove fallito");
 		System.out.println("----- test eseguito con successo -----");
 	}
 
