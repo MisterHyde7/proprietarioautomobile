@@ -33,6 +33,8 @@ public class Test {
 
 			testInserisciAutomobile(automobileService);
 
+			testListAllAutomobile(automobileService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -62,6 +64,9 @@ public class Test {
 		if (proprietarioDaInserire.getId() != null)
 			throw new RuntimeException("test di inserimento fallito, record gia presente");
 		List<Proprietario> listaDiProprietari = new ArrayList<Proprietario>();
+		proprietarioService.inserisciNuovo(proprietarioDaInserire);
+		if (proprietarioDaInserire.getId() == null)
+			throw new RuntimeException("test di update fallito, record non inserito");
 		listaDiProprietari = proprietarioService.listAllProprietari();
 		if (listaDiProprietari == null || listaDiProprietari.isEmpty())
 			throw new RuntimeException("lista di proprietari vuota");
@@ -129,6 +134,21 @@ public class Test {
 		automobileService.inserisciNuovo(autoDaInserire);
 		if (autoDaInserire.getId() == null)
 			throw new RuntimeException("test di inserimento fallito, record non inserito");
+		System.out.println("----- test eseguito con successo -----");
+	}
+
+	private static void testListAllAutomobile(AutomobileService automobileService) throws Exception {
+		System.out.println("----- Inizio test list proprietario -----");
+		Automobile automobileDaInserire = new Automobile("test list", "test list", "list", 2000);
+		if (automobileDaInserire.getId() != null)
+			throw new RuntimeException("test di inserimento fallito, record gia presente");
+		automobileService.inserisciNuovo(automobileDaInserire);
+		if (automobileDaInserire.getId() == null)
+			throw new RuntimeException("test di inserimento fallito, record non inserito");
+		List<Automobile> listaDiAuto = new ArrayList<Automobile>();
+		listaDiAuto = automobileService.listAllAutomobili();
+		if (listaDiAuto == null || listaDiAuto.isEmpty())
+			throw new RuntimeException("lista di proprietari vuota");
 		System.out.println("----- test eseguito con successo -----");
 	}
 
